@@ -6,7 +6,7 @@
 #ifndef GLFM_H
 #define GLFM_H
 
-#if !defined(__APPLE__) && !defined(__ANDROID__) && !defined(__EMSCRIPTEN__)
+#if !defined(__APPLE__) && !defined(__ANDROID__) && !defined(__EMSCRIPTEN__) && !defined(__linux__) && !defined(_WIN32)
 #  error Unsupported platform
 #endif
 
@@ -58,6 +58,12 @@
 #    else
 #      include <OpenGLES/ES2/gl.h>
 #      include <OpenGLES/ES2/glext.h>
+#    endif
+#  elif defined(_WIN32)
+#    if USE_GLFW3
+#      include "../src/glad.h"
+#    else
+#      include "../src/glfm_gl.h"
 #    endif
 #  else
 #    include <GLES2/gl2.h>

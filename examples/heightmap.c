@@ -7,6 +7,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <stdint.h> // UINT32_MAX
 #include "glfm.h"
 #if defined(__EMSCRIPTEN__)
 #include <emscripten/emscripten.h>
@@ -51,6 +52,8 @@ typedef struct {
 static float randRange(float min, float max) {
 #if defined(__EMSCRIPTEN__)
     float p = emscripten_random();
+#elif defined _WIN32
+    float p = (float)((double)rand() / RAND_MAX);
 #else
     float p = (float)((double)arc4random() / UINT32_MAX);
 #endif
